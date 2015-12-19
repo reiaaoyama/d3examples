@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="/d3/d3.min.js" type="text/javascript"></script>
+  </head>
+	<body>
+
+	<script>
+	// Width and Height of the canvas
+	const WIDTH = 600,
+		HEIGHT = 400;
+	// Radius that we will be using
+	const RADIUS = 20;
+
+  // The velocity of each circle, yeah it is moving... 
+	// The radius is up there, 20 all are the same...
+	//   yeah, lame, I know
+
+function initCircles ( ) {
+	var colorCircle = [ "red", "green", "blue", "yellow", "steelblue"];
+
+	// Create "svg" inside body
+	var svg = d3.select("body")
+			.append("svg")
+			.attr("width", WIDTH)
+			.attr("height", HEIGHT);
+  // then get all the circles made. Number of circles depend
+  // on the color "colorCircle" up there.
+  // for single value, just use the vale
+  // for multiple values, you need to use function()
+
+	var circleSet = svg.selectAll("circle")
+				.data(colorCircle)
+			.enter().append("circle")
+				.attr("fill", function(d) { return d;})
+				.attr("cx", function() { return randomAmount( WIDTH-20 )+10;})
+				.attr("cy", function() { return randomAmount( HEIGHT-20 )+10;})
+				.attr("vx", 2)
+				.attr("vy", 2)
+				.attr("fill-opacity", 0.4)
+				.attr("r", RADIUS);
+}
+
+// This is the main part sort of
+initCircles();
+
+  // support function... 
+  /*
+	 * randomAmount - return a "round" number within the specific amount
+	 * @param the size that it will return
+	 * @return an integer less than or equal to the above size
+   */
+	function randomAmount ( myWidth ) {
+		return Math.round( myWidth * Math.random() )
+	};
+
+
+
+	</script>
+	
+	</body>
+	<footer>
+	</footer>
+
+</html>
